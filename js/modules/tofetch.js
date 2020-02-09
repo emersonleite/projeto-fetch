@@ -3,6 +3,8 @@ export default class ToFetch {
     this.element = document.querySelector(".data");
     this.dataHeader = document.querySelector(".header");
     this.url = url;
+this.element.innerHtml = 'carregando';
+this.dataHeader.innerHtml = 'carregando';
   }
 
   async anyFetch() {
