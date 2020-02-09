@@ -3,8 +3,8 @@ export default class ToFetch {
     this.element = document.querySelector(".data");
     this.dataHeader = document.querySelector(".header");
     this.url = url;
-this.element.innerHtml = 'carregando';
-this.dataHeader.innerHtml = 'carregando';
+this.element.innerText = 'carregando';
+this.dataHeader.innerText = 'carregando';
   }
 
   async anyFetch() {
@@ -28,7 +28,7 @@ this.dataHeader.innerHtml = 'carregando';
 
   // renderizando dados na tela - até segundo nível de objetos
   renderData(data) {
-this.element.innerHTML = '';
+this.element.innerText = '';
     for (let key in data) {
       console.log(typeof data[key]);
       if (typeof data[key] !== "object") {
@@ -44,7 +44,7 @@ this.element.innerHTML = '';
   }
 
   renderHeader(header) {
-this.dataHeader.innerHTML = '';
+this.dataHeader.innerText = '';
     for (let [key, value] of header) {
       this.dataHeader.innerHTML += `<p>${key} : ${value}</p>`;
     }
