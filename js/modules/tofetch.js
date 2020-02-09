@@ -1,10 +1,10 @@
 export default class ToFetch {
   constructor(url) {
-    this.element = document.querySelector(".data");
     this.dataHeader = document.querySelector(".header");
+    this.element = document.querySelector(".data");
     this.url = url;
-this.element.innerText = 'carregando';
-this.dataHeader.innerText = 'carregando';
+    this.element.innerHTML = "<p>carregando</p>";
+    this.dataHeader.innerHTML = "<p>carregando</p>";
   }
 
   async anyFetch() {
@@ -19,32 +19,31 @@ this.dataHeader.innerText = 'carregando';
     //console.log(this.resposta.headers.get("content-type"));
     //console.log(this.resposta.headers);
     this.dados = await this.resposta.json();
-    // mostrando dados...
     console.log(this.dados);
-    //return this.dados;
     this.renderData(this.dados);
     this.renderHeader(this.resposta.headers);
   }
 
   // renderizando dados na tela - até segundo nível de objetos
   renderData(data) {
-this.element.innerText = '';
+    this.element.innerHTML = "";
     for (let key in data) {
       console.log(typeof data[key]);
       if (typeof data[key] !== "object") {
-        this.element.innerHTML += `<p>${key} : ${data[key]}</p>`;
+        this.element.innerHTML += `<li>${key} : ${data[key]}</li>`;
       } else {
-        this.element.innerHTML += `<p>${key}</p>`;
+        const title = `<li>${key}</li>`
+        this.element.innerHTML += title;
         for (let key2 in data[key]) {
-          this.element.innerHTML +=  `<p>${key2} - ${data[key][key2]}</p>`;
+          const values = `<li>${key2} - ${JSON.stringify(data[key][key2])}</li>`
+          this.element.innerHTML += values;
         }
-        this.element.innerHTML += `<br>`;
       }
     }
   }
 
   renderHeader(header) {
-this.dataHeader.innerText = '';
+    this.dataHeader.innerText = "";
     for (let [key, value] of header) {
       this.dataHeader.innerHTML += `<p>${key} : ${value}</p>`;
     }
