@@ -26,6 +26,7 @@ export default class ToFetch {
 
   // renderizando dados na tela - até segundo nível de objetos
   renderData(data) {
+this.element.innerHTML = '';
     for (let key in data) {
       console.log(typeof data[key]);
       if (typeof data[key] !== "object") {
@@ -41,6 +42,7 @@ export default class ToFetch {
   }
 
   renderHeader(header) {
+this.dataHeader.innerHTML = '';
     for (let [key, value] of header) {
       this.dataHeader.innerHTML += `<p>${key} : ${value}</p>`;
     }
