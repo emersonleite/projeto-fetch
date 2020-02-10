@@ -9,37 +9,30 @@ export default class ToFetch {
 
   async anyFetch() {
     this.resposta = await fetch(this.url);
-    // retornando a url
-    //console.log(this.resposta.url);
-    // interando sobre o headers da resposta
-    /*  for (let [key, value] of this.resposta.headers) {
-      console.log(`${key}: ${value}`);
-    } */
-    // Recuperando o tipo de dado da resposta
-    //console.log(this.resposta.headers.get("content-type"));
-    //console.log(this.resposta.headers);
     this.dados = await this.resposta.json();
-    console.log(this.dados);
-    this.renderData(this.dados);
     this.renderHeader(this.resposta.headers);
+    this.arrayData(this.dados);
   }
 
-  // renderizando dados na tela - até segundo nível de objetos
-  renderData(data) {
+  arrayData(data) {
     this.element.innerHTML = "";
-    for (let key in data) {
-      console.log(typeof data[key]);
-      if (typeof data[key] !== "object") {
-        this.element.innerHTML += `<li>${key} : ${data[key]}</li>`;
-      } else {
-        const title = `<li>${key}</li>`
-        this.element.innerHTML += title;
-        for (let key2 in data[key]) {
-          const values = `<li>${key2} - ${JSON.stringify(data[key][key2])}</li>`
-          this.element.innerHTML += values;
-        }
+    let arrayData = Object.entries(data);
+    arrayData.map(item => {
+      const ul = document.createElement("ul");
+      let li1 = document.createElement("li");
+      li1.innerText = `${item[0]}`;
+      li1.classList.add('head')
+      ul.append(li1);
+      if (typeof item[1] === "object") {
+        const dataObject = Object.entries(item[1]);
+        dataObject.map((dataItem, index) => {
+          let li2 = document.createElement("li");
+          li2.innerText = `${dataItem[0]} : ${dataItem[1]}`;
+          ul.append(li2);
+        });
       }
-    }
+      this.element.appendChild(ul);
+    });
   }
 
   renderHeader(header) {
