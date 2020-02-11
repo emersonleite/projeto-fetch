@@ -1,14 +1,15 @@
 import ToFetch from "./modules/tofetch.js";
 
-const tofetch = new ToFetch("https://blockchain.info/ticker");
+// inicializando
+const tofetch = new ToFetch();
+//tofetch.anyFetch("https://blockchain.info/ticker");
 tofetch.init();
+console.log(tofetch.init());
 
-/* setInterval(()=>{
-  tofetch.init();
-  console.log('atualização')
-},1000) */
 
-/* setInterval(tofetch.init(),1000); */
+/* https://blockchain.info/ticker */
 
-/* const tofetch = new ToFetch('https://api.myjson.com/bins/xi3hi');
-tofetch.init(); */
+/* "https://api.myjson.com/bins/xi3hi" */
+
+/* https://reqres.in/api/users?page=2 */
+
