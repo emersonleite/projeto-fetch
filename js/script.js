@@ -13,3 +13,5 @@ console.log(tofetch.init());
 
 /* https://reqres.in/api/users?page=2 */
 
+/* https://api.github.com/users/emersonleite */
+

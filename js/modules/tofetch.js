@@ -5,6 +5,8 @@ export default class ToFetch {
     this.element.innerHTML = "<p>carregando</p>";
     this.dataHeader.innerHTML = "<p>carregando</p>";
     this.search = document.querySelector(".input-search");
+    this.check = document.querySelector('.checkbox');
+    console.log(this.check);
   }
 
   searchEvent() {
@@ -13,18 +15,45 @@ export default class ToFetch {
     });
   }
 
-  /*   searchEvent() {
-    this.search.addEventListener("change", () => {
-      this.searchEventCallback();
-    });
+  /*---------------------------------------------------------------------*/
+
+ /*  checkEvent(){
+    this.check.addEventListener('change', ()=>{
+      console.log('clicou');
+      console.log(event.target)
+      if(this.check.checked) {
+        console.log('checado')
+      }
+    })
+  } */
+
+  /*---------------------------------------------------------------------*/
+
+  // OUTRA FORMA:
+  
+/*    searchEvent() {
+    this.search.addEventListener("change", (event) => {
+      this.callbackSearch(event)});
   }
 
-  searchEventCallback() {
-    console.log(event.currentTarget.value);
-    //console.log(event.currentTarget.value);
-    this.anyFetch(event.currentTarget.value);
-    
+  callbackSearch(){
+    console.log(this);
+    this.anyFetch(event.target.value);
   } */
+
+  /*---------------------------------------------------------------------*/
+
+  //Forma errada
+
+ /*  searchEvent() {
+    this.search.addEventListener("change", this.callbackSearch);
+  }
+
+  callbackSearch(event){
+    this.anyFetch(event.target.value);
+  } */
+ 
+/*---------------------------------------------------------------------*/
 
   async anyFetch(url = "https://api.myjson.com/bins/xi3hi") {
     this.url = url;
@@ -54,7 +83,7 @@ export default class ToFetch {
       li1.innerText = `${item[0]}`;
       li1.classList.add("head");
       ul.append(li1);
-      if (typeof item[1] === "object") {
+      if (typeof item[1] === "object" && typeof item[1] !== null ) {
         const dataObject = Object.entries(item[1]);
         dataObject.map((dataItem, index) => {
           let li2 = document.createElement("li");
@@ -73,19 +102,19 @@ export default class ToFetch {
     }
   }
 
-  outrafuncao(ola) {
-    return ola;
-  }
+ /*  bindCallback() {
+    this.callbackSearch = this.callbackSearch.bind(this);
+  }  */
 
-  bindCallback() {
-    this.searchEventCallback = this.searchEventCallback.bind(this);
-  }
+
 
   // inicializando
   init() {
     this.anyFetch();
-    this.searchEvent();
-    //this.bindCallback();
+  this.searchEvent();
+    this.search.focus();
+   /*  this.checkEvent() */
+    /* this.bindCallback();  */
     return this;
   }
 }
